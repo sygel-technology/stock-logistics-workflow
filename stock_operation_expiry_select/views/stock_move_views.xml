@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 Manuel Regidor <manuel.regidor@sygel.es>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="view_stock_move_line_operation_tree_expiry_select">
+        <field name="name">view.stock.move.line.operation.tree.expiry.select</field>
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="product_expiry.view_stock_move_line_operation_tree_expiry"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='expiration_date']" position="attributes">
+                <attribute name="readonly">0</attribute>
+                <attribute name="attrs">
+                    {'column_invisible': ['|', ('parent.use_expiration_date', '!=', True), ('parent.picking_code', '!=', 'incoming')],}
+                </attribute>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="view_stock_move_line_detailed_operation_tree_expiry_select">
+        <field name="name">view.stock.move.line.detailed.operation.tree_expiry_select</field>
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="product_expiry.view_stock_move_line_detailed_operation_tree_expiry"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='expiration_date']" position="attributes">
+                <attribute name="readonly">0</attribute>
+                <attribute name="attrs">
+                    {'column_invisible': [('parent.picking_type_code', '!=', 'incoming')],}
+                </attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
